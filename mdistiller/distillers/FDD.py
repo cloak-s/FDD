@@ -48,25 +48,6 @@ class InverseBottleBlock(nn.Module):
 
 
 
-def fast_adaptive_std_pool2d(input_tensor, out_size=(1, 1), eps=1e-5):
-    """
-    快速版本：利用 E[x^2] - E[x]^2 公式并行计算 std
-    """
-    # 1. 计算 E[x] (均值的池化)
-    mean = F.adaptive_avg_pool2d(input_tensor, out_size)
-
-    # 2. 计算 E[x^2] (平方的均值池化)
-    mean_sq = F.adaptive_avg_pool2d(input_tensor ** 2, out_size)
-
-    # 3. 计算方差 Var = E[x^2] - (E[x])^2
-    # 使用 relu 确保方差非负（防止浮点数精度误差导致微小的负数）
-    var = F.relu(mean_sq - mean ** 2)
-
-    # 4. 计算标准差
-    std = torch.sqrt(var + eps)
-
-    return std
-
 
 class FDD(Distiller):
     """Distilling the Knowledge in a Neural Network"""
@@ -212,3 +193,4 @@ class FDD(Distiller):
             "loss_kd": loss_kd,
         }
         return logits_student, losses_dict
+
