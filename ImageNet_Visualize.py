@@ -17,10 +17,6 @@ def create_imagenet_loaders(data_root, batch_size=128, num_workers=8, input_size
     train_dir = os.path.join(data_root, 'train')
     val_dir = os.path.join(data_root, 'val')
 
-    if not os.path.isdir(train_dir) or not os.path.isdir(val_dir):
-        print(f"警告：在 '{data_root}' 中未找到 'train' 或 'val' 文件夹。")
-
-    print(f'训练集 input_size: {input_size}')
     train_transform = transforms.Compose(
         [
             transforms.RandomResizedCrop(input_size),
@@ -399,5 +395,6 @@ if __name__ == '__main__':
     print("-" * 30)
     drop = sim_low - sim_high
     print(f"diff (Low - High): {drop:.4f}")
+
 
 
