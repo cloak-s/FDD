@@ -11,18 +11,6 @@ import random
 from .WKD import adaptive_avg_std_pool2d, wkd_feature_loss
 from pytorch_wavelets import DWTForward, DWTInverse
 
-# def Normalize(feat):
-#     return (feat - feat.mean(dim=0)) / (feat.std(dim=0, unbiased=False) + 1e-6)
-#
-#
-# def decorrelation(feats_stu, feats_tea, kappa=0.01):
-#     B, D = feats_stu.shape[0], feats_stu.shape[1]
-#     feats_stu_norm, feats_tea_norm = Normalize(feats_stu), Normalize(feats_tea) # normalise along batch dim; [B,D]
-#     rcc = torch.mm(feats_tea_norm.T, feats_stu_norm) / B # representation cross-correlation matrix; [D,D]
-#     idt = torch.eye(D, device=rcc.device) # identity matrix [D,D]
-#     loss_rsd = (rcc - idt).pow(2) # information maximisation
-#     loss_rsd[(1 - idt).bool()] *= kappa # decorrelation
-#     return loss_rsd.sum(dim=-1).mean(dim=0)
 
 
 class InverseBottleBlock(nn.Module):
@@ -193,4 +181,5 @@ class FDD(Distiller):
             "loss_kd": loss_kd,
         }
         return logits_student, losses_dict
+
 
