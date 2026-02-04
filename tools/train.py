@@ -95,8 +95,7 @@ def main(cfg, resume, opts):
 
     capture_buffer = io.StringIO()
 
-    # 使用 redirect_stdout 上下文管理器
-    # 在这段代码块里，所有的 print() 都会被写入 capture_buffer，而不是屏幕
+
     with redirect_stdout(capture_buffer):
         show_cfg(cfg)
 
