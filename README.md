@@ -1,4 +1,3 @@
-# FDD
-Feature-based Decoupled Distillation
+# Feature-based Decoupled Distillation (FDD)
 
 Our code will be available.
